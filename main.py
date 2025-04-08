@@ -6,6 +6,7 @@ def calcular_media(numeros):
         return 0
     return sum(numeros) / len(numeros)
 
+<<<<<<< HEAD
 def calcular_mediana(numeros):
     """
     Calcula a mediana de uma lista de números
@@ -17,6 +18,17 @@ def calcular_mediana(numeros):
     if len(numeros_ordenados) % 2 == 0:
         return (numeros_ordenados[meio - 1] + numeros_ordenados[meio]) / 2
     return numeros_ordenados[meio]
+=======
+def calcular_moda(numeros):
+    """
+    Calcula a moda de uma lista de números
+    """
+    if not numeros:
+        return 0
+    from collections import Counter
+    contador = Counter(numeros)
+    return max(contador.items(), key=lambda x: x[1])[0]
+>>>>>>> master
 
 # Exemplo de uso
 if __name__ == "__main__":

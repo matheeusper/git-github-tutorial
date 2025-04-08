@@ -6,6 +6,18 @@ def calcular_media(numeros):
         return 0
     return sum(numeros) / len(numeros)
 
+def calcular_mediana(numeros):
+    """
+    Calcula a mediana de uma lista de números
+    """
+    if not numeros:
+        return 0
+    numeros_ordenados = sorted(numeros)
+    meio = len(numeros_ordenados) // 2
+    if len(numeros_ordenados) % 2 == 0:
+        return (numeros_ordenados[meio - 1] + numeros_ordenados[meio]) / 2
+    return numeros_ordenados[meio]
+
 # Exemplo de uso
 if __name__ == "__main__":
     # Lista de exemplo

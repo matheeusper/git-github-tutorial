@@ -1,4 +1,4 @@
-# 🚀 Tutorial de Git e GitHub
+# 🚀 Tutorial Completo de Git e GitHub
 
 Este é um projeto de exemplo para aprender a usar o Git e GitHub. Aqui você encontrará um guia passo a passo sobre como trabalhar com controle de versão.
 
@@ -13,8 +13,10 @@ Este é um projeto de exemplo para aprender a usar o Git e GitHub. Aqui você en
 2. [Comandos Básicos](#-comandos-básicos)
 3. [Trabalhando com Branches](#-trabalhando-com-branches)
 4. [Pull Requests](#-pull-requests)
-5. [Exemplo Prático](#-exemplo-prático)
-6. [Boas Práticas](#-boas-práticas)
+5. [Gerenciando Branches](#-gerenciando-branches)
+6. [Tags e Versões](#-tags-e-versões)
+7. [Exemplo Prático](#-exemplo-prático)
+8. [Boas Práticas](#-boas-práticas)
 
 ## ⚙️ Configuração Inicial
 
@@ -92,6 +94,29 @@ git branch
 git push -u origin nome-da-branch
 ```
 
+### Resolvendo Conflitos
+1. Quando houver conflitos, você verá algo assim:
+```python
+<<<<<<< HEAD
+seu código aqui
+=======
+código do outro desenvolvedor aqui
+>>>>>>> master
+```
+
+2. Para resolver:
+   - Abra o arquivo com conflito
+   - Escolha qual código manter
+   - Remova as linhas de marcação (<<<<<<< HEAD, =======, >>>>>>> master)
+   - Salve o arquivo
+
+3. Depois de resolver:
+```bash
+git add arquivo-com-conflito
+git commit -m "Resolvendo conflitos"
+git push
+```
+
 ## 🔄 Pull Requests
 
 ### Criar um Pull Request
@@ -112,9 +137,59 @@ git pull
 git branch -d nome-da-branch
 ```
 
-## 💻 Exemplo Prático
+## 🧹 Gerenciando Branches
 
-Vamos criar um projeto Python simples para demonstrar o fluxo de trabalho com Git e GitHub.
+### Verificar Branches
+```bash
+# Ver branches locais
+git branch
+
+# Ver todas as branches (locais e remotas)
+git branch -a
+```
+
+### Limpar Branches
+```bash
+# Deletar branch local
+git branch -d nome-da-branch
+
+# Forçar deleção de branch local
+git branch -D nome-da-branch
+
+# Deletar branch remota
+git push origin --delete nome-da-branch
+```
+
+### Boas Práticas de Gerenciamento
+1. Mantenha apenas branches ativas
+2. Delete branches após o merge
+3. Use nomes descritivos para branches
+4. Mantenha a branch principal (master) estável
+
+## 🏷️ Tags e Versões
+
+### Criar e Gerenciar Tags
+```bash
+# Criar uma tag anotada
+git tag -a v1.0.0 -m "Primeira versão estável"
+
+# Listar todas as tags
+git tag
+
+# Ver detalhes de uma tag
+git show v1.0.0
+
+# Enviar tags para o GitHub
+git push origin v1.0.0
+```
+
+### Versionamento Semântico
+- v1.0.0 (Major.Minor.Patch)
+  - Major: Mudanças incompatíveis
+  - Minor: Novas funcionalidades compatíveis
+  - Patch: Correções de bugs
+
+## 💻 Exemplo Prático
 
 ### 1. Criar um arquivo Python
 Crie um arquivo chamado `main.py` com o seguinte conteúdo:
@@ -130,57 +205,44 @@ def calcular_media(numeros):
 
 # Exemplo de uso
 if __name__ == "__main__":
-    # Lista de exemplo
     notas = [7.5, 8.0, 9.0, 6.5]
-    
-    # Calculando a média
     media = calcular_media(notas)
-    
-    # Mostrando o resultado
     print(f"As notas são: {notas}")
     print(f"A média é: {media:.2f}")
 ```
 
-### 2. Criar um arquivo de dependências
-Crie um arquivo chamado `requirements.txt`:
-
-```
-numpy==1.24.0
-pandas==2.0.0
-```
-
-### 3. Adicionar e commitar os arquivos
+### 2. Criar uma branch para nova funcionalidade
 ```bash
-# Adicionar os arquivos
-git add main.py requirements.txt
-
-# Criar um commit
-git commit -m "Adicionando arquivos Python de exemplo"
-
-# Enviar para o GitHub
-git push
-```
-
-### 4. Criar uma nova branch para uma funcionalidade
-```bash
-# Criar e mudar para uma nova branch
 git checkout -b feature-nova-funcionalidade
+```
 
-# Fazer alterações no código
-# Adicionar e commitar as alterações
-git add .
-git commit -m "Adicionando nova funcionalidade"
+### 3. Adicionar novas funções
+```python
+def calcular_mediana(numeros):
+    """
+    Calcula a mediana de uma lista de números
+    """
+    if not numeros:
+        return 0
+    numeros_ordenados = sorted(numeros)
+    meio = len(numeros_ordenados) // 2
+    if len(numeros_ordenados) % 2 == 0:
+        return (numeros_ordenados[meio - 1] + numeros_ordenados[meio]) / 2
+    return numeros_ordenados[meio]
+```
 
-# Enviar a branch para o GitHub
+### 4. Commitar e enviar alterações
+```bash
+git add main.py
+git commit -m "Adicionando função para calcular mediana"
 git push -u origin feature-nova-funcionalidade
 ```
 
-### 5. Criar um Pull Request
-1. Vá para o GitHub
-2. Clique em "Compare & pull request"
-3. Dê um título e descrição ao PR
-4. Clique em "Create pull request"
-5. Clique em "Merge pull request"
+### 5. Criar e mesclar Pull Request
+1. No GitHub, crie um Pull Request
+2. Revise as alterações
+3. Mescle o PR
+4. Delete a branch após o merge
 
 ## 📝 Boas Práticas
 
@@ -199,11 +261,17 @@ git push -u origin feature-nova-funcionalidade
    - Escreva descrições claras
    - Responda a comentários e faça ajustes quando necessário
 
+4. **Versionamento**
+   - Use tags para marcar versões importantes
+   - Siga o versionamento semântico
+   - Mantenha um changelog atualizado
+
 ## 📚 Recursos Adicionais
 
 - [Documentação oficial do Git](https://git-scm.com/doc)
 - [GitHub Guides](https://guides.github.com/)
 - [GitHub Flow](https://guides.github.com/introduction/flow/)
+- [Versionamento Semântico](https://semver.org/)
 
 ## 🤝 Contribuição
 

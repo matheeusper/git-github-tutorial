@@ -1,6 +1,17 @@
+"""
+Módulo de funções estatísticas básicas.
+Este módulo fornece funções para calcular média, mediana, moda, variância e desvio padrão.
+"""
+
 def calcular_media(numeros):
     """
-    Calcula a média de uma lista de números
+    Calcula a média de uma lista de números.
+    
+    Args:
+        numeros (list): Lista de números
+        
+    Returns:
+        float: Média dos números
     """
     if not numeros:
         return 0
@@ -8,7 +19,13 @@ def calcular_media(numeros):
 
 def calcular_mediana(numeros):
     """
-    Calcula a mediana de uma lista de números
+    Calcula a mediana de uma lista de números.
+    
+    Args:
+        numeros (list): Lista de números
+        
+    Returns:
+        float: Mediana dos números
     """
     if not numeros:
         return 0
@@ -20,7 +37,13 @@ def calcular_mediana(numeros):
 
 def calcular_moda(numeros):
     """
-    Calcula a moda de uma lista de números
+    Calcula a moda de uma lista de números.
+    
+    Args:
+        numeros (list): Lista de números
+        
+    Returns:
+        float: Moda dos números
     """
     if not numeros:
         return 0
@@ -28,25 +51,45 @@ def calcular_moda(numeros):
     contador = Counter(numeros)
     return max(contador.items(), key=lambda x: x[1])[0]
 
-def calcular_desvio_padrao(numeros):
+def calcular_variancia(numeros):
     """
-    Calcula o desvio padrão de uma lista de números
+    Calcula a variância de uma lista de números.
+    
+    Args:
+        numeros (list): Lista de números
+        
+    Returns:
+        float: Variância dos números
     """
     if not numeros:
         return 0
     media = calcular_media(numeros)
     diferencas_quadradas = [(x - media) ** 2 for x in numeros]
-    variancia = sum(diferencas_quadradas) / len(numeros)
-    return variancia ** 0.5
+    return sum(diferencas_quadradas) / len(numeros)
+
+def calcular_desvio_padrao(numeros):
+    """
+    Calcula o desvio padrão de uma lista de números.
+    
+    Args:
+        numeros (list): Lista de números
+        
+    Returns:
+        float: Desvio padrão dos números
+    """
+    if not numeros:
+        return 0
+    return calcular_variancia(numeros) ** 0.5
 
 # Exemplo de uso
 if __name__ == "__main__":
     # Lista de exemplo
-    notas = [7.5, 8.0, 9.0, 6.5]
+    notas = [7.5, 8.0, 9.0, 6.5, 8.5]
     
-    # Calculando a média
-    media = calcular_media(notas)
-    
-    # Mostrando o resultado
-    print(f"As notas são: {notas}")
-    print(f"A média é: {media:.2f}") 
+    # Calculando todas as estatísticas
+    print(f"Dados: {notas}")
+    print(f"Média: {calcular_media(notas):.2f}")
+    print(f"Mediana: {calcular_mediana(notas):.2f}")
+    print(f"Moda: {calcular_moda(notas):.2f}")
+    print(f"Variância: {calcular_variancia(notas):.2f}")
+    print(f"Desvio Padrão: {calcular_desvio_padrao(notas):.2f}") 

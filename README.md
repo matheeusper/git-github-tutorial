@@ -213,9 +213,9 @@ git merge --no-ff feature-nova
 1. Quando ocorrer um conflito, você verá:
 ```bash
 <<<<<<< HEAD
-código da branch atual
+# código da branch atual
 =======
-código da outra branch
+# código da outra branch
 >>>>>>> feature-nova
 ```
 
